@@ -13,5 +13,8 @@ export const Login = () => (
       </label>
       <input type="submit" value="Sign in" />
     </form>
+    <button type="button">
+      Sign in with Google
+    </button>
   </div>
 );
