@@ -11,6 +11,7 @@ export const Login = () => (
         Password
         <input id="password" />
       </label>
+      <input type="submit" value="Sign in" />
     </form>
   </div>
 );
