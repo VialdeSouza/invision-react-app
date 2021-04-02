@@ -25,13 +25,20 @@ describe('Login form', () => {
     const button = screen.getByRole('button', { name: /Sign in with Google/i });
     expect(button).toBeInTheDocument();
   });
+
+  test('should call passwordValidator with password onChange input password', () => {
+    passwordValidator.mockImplementation(() => ({}));
+    render(<Login />);
+    const passwordInput = screen.getByRole('textbox', { name: /password/i });
+    fireEvent.change(passwordInput, { target: { value: 'any password' } });
+    expect(passwordValidator).toHaveBeenCalledWith('any password');
+  });
+
   test('should show error when passwordValidator returns error', () => {
     passwordValidator.mockImplementation(() => ({ isValid: false, ruleBroken: 'any message about password' }));
     render(<Login />);
-
     const passwordInput = screen.getByRole('textbox', { name: /password/i });
     fireEvent.change(passwordInput, { target: { value: 'invalid password' } });
-
     const errorMessage = screen.getByText(/any message about password/i);
     expect(errorMessage).toBeInTheDocument();
   });
