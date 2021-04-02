@@ -17,7 +17,7 @@ const Field = ({
   </div>
 );
 Field.defaultProps = {
-  error: false,
+  error: '',
 };
 Field.propTypes = {
   error: PropTypes.string,
