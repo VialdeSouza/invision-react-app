@@ -1,6 +1,9 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { Login } from './login';
+import passwordValidator from '../utils/password-validator';
+
+jest.mock('../utils/password-validator');
 
 describe('Login form', () => {
   test('should render form to login', () => {
@@ -21,5 +24,15 @@ describe('Login form', () => {
     render(<Login />);
     const button = screen.getByRole('button', { name: /Sign in with Google/i });
     expect(button).toBeInTheDocument();
+  });
+  test('should show error when passwordValidator returns error', () => {
+    passwordValidator.mockImplementation(() => ({ isValid: false, ruleBroken: 'any message about password' }));
+    render(<Login />);
+
+    const passwordInput = screen.getByRole('textbox', { name: /password/i });
+    fireEvent.change(passwordInput, { target: { value: 'invalid password' } });
+
+    const errorMessage = screen.getByText(/any message about password/i);
+    expect(errorMessage).toBeInTheDocument();
   });
 });
