@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Field from '../components/field';
 import { signIn } from '../core/signin-core';
 import emailValidator from '../utils/email-validator';
@@ -51,7 +52,7 @@ export const Login = () => {
       <button type="button">
         Sign in with Google
       </button>
-      <a href="#">Create Account</a>
+      <Link to="/signup">Create Account</Link>
     </div>
   );
 };
