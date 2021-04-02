@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Field from '../components/field';
 import emailValidator from '../utils/email-validator';
 import passwordValidator from '../utils/password-validator';
 
@@ -22,19 +23,23 @@ export const Login = () => {
   return (
     <div>
       <form>
-        <label htmlFor="username">
-          Users name or Email
-          <input id="username" onChange={onChangeEmail} />
-        </label>
-        {isValidEmail.ruleBroken}
-        <label htmlFor="password">
-          Password
-          <input
-            id="password"
-            onChange={onChangePassword}
-          />
-        </label>
-        {isValidPassword.ruleBroken}
+        <Field
+          value={loginForm.email}
+          label="Users name or Email"
+          id="username"
+          onChange={onChangeEmail}
+          error={isValidEmail.isValid === false}
+          helperText={isValidEmail.ruleBroken}
+        />
+
+        <Field
+          value={loginForm.password}
+          label="Password"
+          id="password"
+          onChange={onChangePassword}
+          error={isValidPassword.isValid === false}
+          helperText={isValidPassword.ruleBroken}
+        />
 
         <input type="submit" value="Sign in" />
       </form>
