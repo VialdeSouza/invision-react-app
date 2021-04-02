@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Field from '../components/field';
+import { signIn } from '../core/signin-core';
 import emailValidator from '../utils/email-validator';
 import passwordValidator from '../utils/password-validator';
 
@@ -11,18 +12,24 @@ export const Login = () => {
     const password = e.target.value;
     const { errorMessage } = passwordValidator(password);
     setValidations({ ...validations, errorPassword: errorMessage });
+    setLoginForm((prev) => ({ ...prev, password }));
   };
 
   const onChangeEmail = (e) => {
     const email = e.target.value;
     const { errorMessage } = emailValidator(email);
     setValidations({ ...validations, errorEmail: errorMessage });
-    setLoginForm({ ...loginForm, email });
+    setLoginForm((prev) => ({ ...prev, email }));
+  };
+
+  const onSubmitForm = (e) => {
+    e.preventDefault();
+    signIn(loginForm);
   };
 
   return (
     <div>
-      <form>
+      <form onSubmit={onSubmitForm}>
         <Field
           label="Users name or Email"
           id="username"
