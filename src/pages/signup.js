@@ -28,6 +28,7 @@ const Signup = () => (
         value=""
         error=""
       />
+      <input type="submit" value="Sign up" />
     </form>
   </div>
 );
