@@ -19,14 +19,18 @@ const makeMockValidations = () => {
   return (mockEmailValidator, mockPasswordValidator);
 };
 
+const renderWithProviders = async (component, history) => {
+  makeMockValidations();
+  return render(
+    <Router history={history || createMemoryHistory()}>
+      {component}
+    </Router>,
+  );
+};
+
 describe('Login form', () => {
   test('should render form to login', () => {
-    const history = createMemoryHistory();
-    render(
-      <Router history={history}>
-        <Login />
-      </Router>,
-    );
+    renderWithProviders(<Login />);
     const emailInput = screen.getByRole('textbox', { name: /users name or Email/i });
     const passwordInput = screen.getByRole('textbox', { name: /password/i });
     expect(emailInput).toBeInTheDocument();
@@ -34,48 +38,27 @@ describe('Login form', () => {
   });
 
   test('should render button Sign in', () => {
-    const history = createMemoryHistory();
-    render(
-      <Router history={history}>
-        <Login />
-      </Router>,
-    );
+    renderWithProviders(<Login />);
     const button = screen.getByRole('button', { name: 'Sign in' });
     expect(button).toBeInTheDocument();
   });
 
   test('should render button Sign in with Google', () => {
-    const history = createMemoryHistory();
-    render(
-      <Router history={history}>
-        <Login />
-      </Router>,
-    );
+    renderWithProviders(<Login />);
     const button = screen.getByRole('button', { name: /Sign in with Google/i });
     expect(button).toBeInTheDocument();
   });
 
   test('should call passwordValidator with password onChange input password', () => {
-    makeMockValidations();
-    const history = createMemoryHistory();
-    render(
-      <Router history={history}>
-        <Login />
-      </Router>,
-    );
+    renderWithProviders(<Login />);
     const passwordInput = screen.getByRole('textbox', { name: /password/i });
     fireEvent.change(passwordInput, { target: { value: 'any password' } });
     expect(passwordValidator).toHaveBeenCalledWith('any password');
   });
 
   test('should show error when passwordValidator returns error', () => {
+    renderWithProviders(<Login />);
     passwordValidator.mockImplementation(() => ({ isValid: false, errorMessage: 'any message about password' }));
-    const history = createMemoryHistory();
-    render(
-      <Router history={history}>
-        <Login />
-      </Router>,
-    );
     const passwordInput = screen.getByRole('textbox', { name: /password/i });
     fireEvent.change(passwordInput, { target: { value: 'invalid password' } });
     const errorMessage = screen.getByText(/any message about password/i);
@@ -83,26 +66,15 @@ describe('Login form', () => {
   });
 
   test('should call emailValidator with email onChange input email', () => {
-    makeMockValidations();
-    const history = createMemoryHistory();
-    render(
-      <Router history={history}>
-        <Login />
-      </Router>,
-    );
+    renderWithProviders(<Login />);
     const emailInput = screen.getByRole('textbox', { name: /email/i });
     fireEvent.change(emailInput, { target: { value: 'any email' } });
     expect(emailValidator).toHaveBeenCalledWith('any email');
   });
 
   test('should show error when emailValidator returns error', () => {
+    renderWithProviders(<Login />);
     emailValidator.mockImplementation(() => ({ isValid: false, errorMessage: 'any message about email' }));
-    const history = createMemoryHistory();
-    render(
-      <Router history={history}>
-        <Login />
-      </Router>,
-    );
     const emailInput = screen.getByRole('textbox', { name: /email/i });
     fireEvent.change(emailInput, { target: { value: 'invalid email' } });
     const errorMessage = screen.getByText(/any message about email/i);
@@ -110,18 +82,10 @@ describe('Login form', () => {
   });
 
   test('should call signIn on submit form', () => {
-    makeMockValidations();
-    const history = createMemoryHistory();
-    render(
-      <Router history={history}>
-        <Login />
-      </Router>,
-    );
+    renderWithProviders(<Login />);
     const button = screen.getByRole('button', { name: 'Sign in' });
-
     const emailInput = screen.getByRole('textbox', { name: /email/i });
     const passwordInput = screen.getByRole('textbox', { name: /password/i });
-
     fireEvent.change(emailInput, { target: { value: 'any email' } });
     fireEvent.change(passwordInput, { target: { value: 'any password' } });
     fireEvent.click(button);
@@ -130,12 +94,7 @@ describe('Login form', () => {
   });
 
   test('should render link Create Account', () => {
-    const history = createMemoryHistory();
-    render(
-      <Router history={history}>
-        <Login />
-      </Router>,
-    );
+    renderWithProviders(<Login />);
     const link = screen.getByRole('link', { name: /create account/i });
     expect(link).toBeInTheDocument();
   });
@@ -143,11 +102,7 @@ describe('Login form', () => {
   test('should navigate to Signup when click Create Account', () => {
     const history = createMemoryHistory();
     const pushSpy = jest.spyOn(history, 'push');
-    render(
-      <Router history={history}>
-        <Login />
-      </Router>,
-    );
+    renderWithProviders(<Login />, history);
     const link = screen.getByRole('link', { name: /create account/i });
     fireEvent.click(link);
     expect(pushSpy).toHaveBeenCalledWith('/signup');
