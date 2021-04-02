@@ -2,8 +2,10 @@ import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { Login } from './login';
 import passwordValidator from '../utils/password-validator';
+import emailValidator from '../utils/email-validator';
 
 jest.mock('../utils/password-validator');
+jest.mock('../utils/email-validator');
 
 describe('Login form', () => {
   test('should render form to login', () => {
@@ -40,6 +42,22 @@ describe('Login form', () => {
     const passwordInput = screen.getByRole('textbox', { name: /password/i });
     fireEvent.change(passwordInput, { target: { value: 'invalid password' } });
     const errorMessage = screen.getByText(/any message about password/i);
+    expect(errorMessage).toBeInTheDocument();
+  });
+  test('should call emailValidator with email onChange input email', () => {
+    emailValidator.mockImplementation(() => ({}));
+    render(<Login />);
+    const emailInput = screen.getByRole('textbox', { name: /email/i });
+    fireEvent.change(emailInput, { target: { value: 'any email' } });
+    expect(emailValidator).toHaveBeenCalledWith('any email');
+  });
+  
+  test('should show error when emailValidator returns error', () => {
+    emailValidator.mockImplementation(() => ({ isValid: false, ruleBroken: 'any message about email' }));
+    render(<Login />);
+    const emailInput = screen.getByRole('textbox', { name: /email/i });
+    fireEvent.change(emailInput, { target: { value: 'invalid email' } });
+    const errorMessage = screen.getByText(/any message about email/i);
     expect(errorMessage).toBeInTheDocument();
   });
 });
