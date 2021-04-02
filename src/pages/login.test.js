@@ -10,9 +10,16 @@ describe('Login form', () => {
     expect(nameInput).toBeInTheDocument();
     expect(passwordInput).toBeInTheDocument();
   });
+
   test('should render button Sign in', () => {
     render(<Login />);
-    const button = screen.getByRole('button', { name: /Sign in/i });
+    const button = screen.getByRole('button', { name: 'Sign in' });
+    expect(button).toBeInTheDocument();
+  });
+
+  test('should render button Sign in with Google', () => {
+    render(<Login />);
+    const button = screen.getByRole('button', { name: /Sign in with Google/i });
     expect(button).toBeInTheDocument();
   });
 });
