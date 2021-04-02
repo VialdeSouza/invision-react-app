@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const Field = ({
-  value, label, onChange, id, error, helperText,
+  value, label, onChange, id, error,
 }) => (
   <div>
     <label htmlFor={id}>
@@ -13,16 +13,14 @@ const Field = ({
         onChange={onChange}
       />
     </label>
-    {error && helperText}
+    {error.length && error}
   </div>
 );
 Field.defaultProps = {
   error: false,
-  helperText: '',
 };
 Field.propTypes = {
-  error: PropTypes.bool,
-  helperText: PropTypes.string,
+  error: PropTypes.string,
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,

@@ -4,19 +4,19 @@ import emailValidator from '../utils/email-validator';
 import passwordValidator from '../utils/password-validator';
 
 export const Login = () => {
-  const [isValidPassword, setIsValidPassword] = useState({ ruleBroken: '' });
-  const [isValidEmail, setIsValidEmail] = useState({ ruleBroken: '' });
+  const [validations, setValidations] = useState({});
   const [loginForm, setLoginForm] = useState({ password: '', email: '' });
 
   const onChangePassword = (e) => {
     const password = e.target.value;
-    setIsValidPassword(passwordValidator(password));
-    setLoginForm({ ...loginForm, password });
+    const { errorMessage } = passwordValidator(password);
+    setValidations({ ...validations, errorPassword: errorMessage });
   };
 
   const onChangeEmail = (e) => {
     const email = e.target.value;
-    setIsValidEmail(emailValidator(email));
+    const { errorMessage } = emailValidator(email);
+    setValidations({ ...validations, errorEmail: errorMessage });
     setLoginForm({ ...loginForm, email });
   };
 
@@ -24,12 +24,11 @@ export const Login = () => {
     <div>
       <form>
         <Field
-          value={loginForm.email}
           label="Users name or Email"
           id="username"
           onChange={onChangeEmail}
-          error={isValidEmail.isValid === false}
-          helperText={isValidEmail.ruleBroken}
+          value={loginForm.email}
+          error={validations.errorEmail}
         />
 
         <Field
@@ -37,8 +36,7 @@ export const Login = () => {
           label="Password"
           id="password"
           onChange={onChangePassword}
-          error={isValidPassword.isValid === false}
-          helperText={isValidPassword.ruleBroken}
+          error={validations.errorPassword}
         />
 
         <input type="submit" value="Sign in" />

@@ -37,7 +37,7 @@ describe('Login form', () => {
   });
 
   test('should show error when passwordValidator returns error', () => {
-    passwordValidator.mockImplementation(() => ({ isValid: false, ruleBroken: 'any message about password' }));
+    passwordValidator.mockImplementation(() => ({ isValid: false, errorMessage: 'any message about password' }));
     render(<Login />);
     const passwordInput = screen.getByRole('textbox', { name: /password/i });
     fireEvent.change(passwordInput, { target: { value: 'invalid password' } });
@@ -51,9 +51,8 @@ describe('Login form', () => {
     fireEvent.change(emailInput, { target: { value: 'any email' } });
     expect(emailValidator).toHaveBeenCalledWith('any email');
   });
-  
   test('should show error when emailValidator returns error', () => {
-    emailValidator.mockImplementation(() => ({ isValid: false, ruleBroken: 'any message about email' }));
+    emailValidator.mockImplementation(() => ({ isValid: false, errorMessage: 'any message about email' }));
     render(<Login />);
     const emailInput = screen.getByRole('textbox', { name: /email/i });
     fireEvent.change(emailInput, { target: { value: 'invalid email' } });
