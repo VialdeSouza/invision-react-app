@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  act, fireEvent, render, screen,
+  fireEvent, render, screen,
 } from '@testing-library/react';
 import { Login } from './login';
 import passwordValidator from '../utils/password-validator';
@@ -53,6 +53,7 @@ describe('Login form', () => {
     const errorMessage = screen.getByText(/any message about password/i);
     expect(errorMessage).toBeInTheDocument();
   });
+
   test('should call emailValidator with email onChange input email', () => {
     makeMockValidations();
     render(<Login />);
@@ -60,6 +61,7 @@ describe('Login form', () => {
     fireEvent.change(emailInput, { target: { value: 'any email' } });
     expect(emailValidator).toHaveBeenCalledWith('any email');
   });
+
   test('should show error when emailValidator returns error', () => {
     emailValidator.mockImplementation(() => ({ isValid: false, errorMessage: 'any message about email' }));
     render(<Login />);
@@ -68,6 +70,7 @@ describe('Login form', () => {
     const errorMessage = screen.getByText(/any message about email/i);
     expect(errorMessage).toBeInTheDocument();
   });
+
   test('should call signIn on submit form', () => {
     makeMockValidations();
     render(<Login />);
@@ -81,5 +84,11 @@ describe('Login form', () => {
     fireEvent.click(button);
 
     expect(signIn).toHaveBeenCalledWith({ email: 'any email', password: 'any password' });
+  });
+
+  test('should render link Create Account', () => {
+    render(<Login />);
+    const link = screen.getByRole('link', { name: /create account/i });
+    expect(link).toBeInTheDocument();
   });
 });
