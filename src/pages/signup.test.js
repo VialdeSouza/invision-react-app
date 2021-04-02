@@ -12,4 +12,10 @@ describe('Signup Form', () => {
     expect(emailInput).toBeInTheDocument();
     expect(passwordInput).toBeInTheDocument();
   });
+
+  test('should render button Sign up', () => {
+    render(<Signup />);
+    const button = screen.getByRole('button', { name: 'Sign up' });
+    expect(button).toBeInTheDocument();
+  });
 });
