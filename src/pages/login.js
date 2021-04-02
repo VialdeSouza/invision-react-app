@@ -51,6 +51,7 @@ export const Login = () => {
       <button type="button">
         Sign in with Google
       </button>
+      <a href="#">Create Account</a>
     </div>
   );
 };
