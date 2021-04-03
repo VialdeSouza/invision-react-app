@@ -1,12 +1,19 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { ReactComponent as Icon } from '../../assets/google.svg';
 import { Button } from './styles';
 
-const GoogleButton = () => (
+const GoogleButton = ({ label }) => (
   <Button type="button">
     <Icon />
-    Sign in with Google
+    {label}
   </Button>
 );
+GoogleButton.defaultProps = {
+  label: 'Sign in with Google',
+};
+GoogleButton.propTypes = {
+  label: PropTypes.string,
+};
 
 export default GoogleButton;
