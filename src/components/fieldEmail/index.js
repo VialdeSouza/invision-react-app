@@ -15,7 +15,7 @@ const FieldEmail = ({ onChange, value }) => {
   return (
     <Field
       label="Users name or Email"
-      id="username"
+      id="email"
       onChange={onChangeEmail}
       value={value}
       error={error}

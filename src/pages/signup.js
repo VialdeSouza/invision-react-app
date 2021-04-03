@@ -1,31 +1,44 @@
-import React from 'react';
-import Field from '../components/field';
+import React, { useState } from 'react';
 import FieldEmail from '../components/fieldEmail';
 import FieldName from '../components/fieldName';
 import FieldPassword from '../components/fieldPassword';
+import { signUp } from '../core/signup-core';
 
-const Signup = () => (
-  <div>
-    <form>
+const Signup = () => {
+  const [signupForm, setSignupForm] = useState({ name: '', email: '', password: '' });
+  const onChange = (e) => {
+    const { id, value } = e.target;
+    setSignupForm((prev) => ({ ...prev, [id]: value }));
+  };
 
-      <FieldName
-        onChange={() => {}}
-        value=""
-      />
+  const onSubmit = (e) => {
+    e.preventDefault();
+    signUp(signupForm);
+  };
 
-      <FieldEmail
-        onChange={() => {}}
-        value=""
-      />
+  return (
+    <div>
+      <form onSubmit={onSubmit}>
 
-      <FieldPassword
-        label="Create password"
-        onChange={() => {}}
-        value=""
-      />
-      <input type="submit" value="Sign up" />
-    </form>
-  </div>
-);
+        <FieldName
+          onChange={onChange}
+          value={signupForm.name}
+        />
+
+        <FieldEmail
+          onChange={onChange}
+          value={signupForm.email}
+        />
+
+        <FieldPassword
+          label="Create password"
+          onChange={onChange}
+          value={signupForm.password}
+        />
+        <input type="submit" value="Sign up" />
+      </form>
+    </div>
+  );
+};
 
 export default Signup;
