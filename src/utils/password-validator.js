@@ -5,7 +5,9 @@ const passwordValidator = (password) => {
   if (!isValid) {
     return ({ isValid, errorMessage });
   }
-
-  return ({ isValid: false, errorMessage: 'any rule was broken' });
+  if (password.length < 6) {
+    return ({ isValid: false, errorMessage: 'A senha não pode ter menos de 6 caracteres' });
+  }
+  return ({ isValid: true, errorMessage: '' });
 };
 export default passwordValidator;
