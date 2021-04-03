@@ -7,7 +7,8 @@ const FieldName = ({ onChange, value }) => {
   const [error, setError] = useState('');
   const onChangeName = (e) => {
     const name = e.target.value;
-    fieldRequiredValidator(name);
+    const { errorMessage } = fieldRequiredValidator(name);
+    setError(errorMessage);
   };
   return (
     <Field
