@@ -25,6 +25,6 @@ export const GlobalStyle = createGlobalStyle`
     background: #FFFFFF;
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
-    font-family: sans-serif;
+    font-family: var(--main-font);
   }
 `;
