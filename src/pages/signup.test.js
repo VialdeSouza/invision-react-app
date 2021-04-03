@@ -1,7 +1,9 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import Signup from './signup';
+import passwordValidator from '../utils/password-validator';
 
+jest.mock('../utils/password-validator');
 describe('Signup Form', () => {
   test('should render form to signup', () => {
     render(<Signup />);
@@ -13,7 +15,7 @@ describe('Signup Form', () => {
     expect(passwordInput).toBeInTheDocument();
   });
 
-  test('should render button Sign up', () => {
+  test('should call  button Sign up', () => {
     render(<Signup />);
     const button = screen.getByRole('button', { name: 'Sign up' });
     expect(button).toBeInTheDocument();

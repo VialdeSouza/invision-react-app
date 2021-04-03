@@ -49,22 +49,6 @@ describe('Login form', () => {
     expect(button).toBeInTheDocument();
   });
 
-  test('should call passwordValidator with password onChange input password', () => {
-    renderWithProviders(<Login />);
-    const passwordInput = screen.getByRole('textbox', { name: /password/i });
-    fireEvent.change(passwordInput, { target: { value: 'any password' } });
-    expect(passwordValidator).toHaveBeenCalledWith('any password');
-  });
-
-  test('should show error when passwordValidator returns error', () => {
-    renderWithProviders(<Login />);
-    passwordValidator.mockImplementation(() => ({ isValid: false, errorMessage: 'any message about password' }));
-    const passwordInput = screen.getByRole('textbox', { name: /password/i });
-    fireEvent.change(passwordInput, { target: { value: 'invalid password' } });
-    const errorMessage = screen.getByText(/any message about password/i);
-    expect(errorMessage).toBeInTheDocument();
-  });
-
   test('should call emailValidator with email onChange input email', () => {
     renderWithProviders(<Login />);
     const emailInput = screen.getByRole('textbox', { name: /email/i });
