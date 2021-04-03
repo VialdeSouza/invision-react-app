@@ -1,5 +1,6 @@
 import React from 'react';
 import Field from '../components/field';
+import FieldEmail from '../components/fieldEmail';
 import FieldPassword from '../components/fieldPassword';
 
 const Signup = () => (
@@ -14,17 +15,15 @@ const Signup = () => (
         error=""
       />
 
-      <Field
-        label="Users name or Email"
-        id="username"
+      <FieldEmail
         onChange={() => {}}
         value=""
-        error=""
       />
+
       <FieldPassword
         label="Create password"
-        value=""
         onChange={() => {}}
+        value=""
       />
       <input type="submit" value="Sign up" />
     </form>

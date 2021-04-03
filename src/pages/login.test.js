@@ -5,28 +5,15 @@ import {
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { Login } from './login';
-import passwordValidator from '../utils/password-validator';
-import emailValidator from '../utils/email-validator';
 import { signIn } from '../core/signin-core';
 
-jest.mock('../utils/password-validator');
-jest.mock('../utils/email-validator');
 jest.mock('../core/signin-core');
 
-const makeMockValidations = () => {
-  const mockPasswordValidator = passwordValidator.mockImplementation(() => ({ isValid: true, errorMessage: '' }));
-  const mockEmailValidator = emailValidator.mockImplementation(() => ({ isValid: true, errorMessage: '' }));
-  return (mockEmailValidator, mockPasswordValidator);
-};
-
-const renderWithProviders = async (component, history) => {
-  makeMockValidations();
-  return render(
-    <Router history={history || createMemoryHistory()}>
-      {component}
-    </Router>,
-  );
-};
+const renderWithProviders = async (component, history) => render(
+  <Router history={history || createMemoryHistory()}>
+    {component}
+  </Router>,
+);
 
 describe('Login form', () => {
   test('should render form to login', () => {
@@ -47,22 +34,6 @@ describe('Login form', () => {
     renderWithProviders(<Login />);
     const button = screen.getByRole('button', { name: /Sign in with Google/i });
     expect(button).toBeInTheDocument();
-  });
-
-  test('should call emailValidator with email onChange input email', () => {
-    renderWithProviders(<Login />);
-    const emailInput = screen.getByRole('textbox', { name: /email/i });
-    fireEvent.change(emailInput, { target: { value: 'any email' } });
-    expect(emailValidator).toHaveBeenCalledWith('any email');
-  });
-
-  test('should show error when emailValidator returns error', () => {
-    renderWithProviders(<Login />);
-    emailValidator.mockImplementation(() => ({ isValid: false, errorMessage: 'any message about email' }));
-    const emailInput = screen.getByRole('textbox', { name: /email/i });
-    fireEvent.change(emailInput, { target: { value: 'invalid email' } });
-    const errorMessage = screen.getByText(/any message about email/i);
-    expect(errorMessage).toBeInTheDocument();
   });
 
   test('should call signIn on submit form', () => {

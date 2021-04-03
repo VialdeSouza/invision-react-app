@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Field from '../components/field';
+import FieldEmail from '../components/fieldEmail';
 import FieldPassword from '../components/fieldPassword';
 import { signIn } from '../core/signin-core';
-import emailValidator from '../utils/email-validator';
 
 export const Login = () => {
-  const [validations, setValidations] = useState({});
   const [loginForm, setLoginForm] = useState({ password: '', email: '' });
 
   const onChangePassword = (e) => {
@@ -16,8 +14,6 @@ export const Login = () => {
 
   const onChangeEmail = (e) => {
     const email = e.target.value;
-    const { errorMessage } = emailValidator(email);
-    setValidations({ ...validations, errorEmail: errorMessage });
     setLoginForm((prev) => ({ ...prev, email }));
   };
 
@@ -29,12 +25,9 @@ export const Login = () => {
   return (
     <div>
       <form onSubmit={onSubmitForm}>
-        <Field
-          label="Users name or Email"
-          id="username"
+        <FieldEmail
           onChange={onChangeEmail}
           value={loginForm.email}
-          error={validations.errorEmail}
         />
 
         <FieldPassword
