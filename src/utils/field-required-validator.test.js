@@ -6,4 +6,10 @@ describe('fieldRequiredValidator', () => {
     expect(isValid).not.toBeTruthy();
     expect(errorMessage).toEqual('Este campo não pode ser vazio');
   });
+
+  test('should return true if receive valid value', () => {
+    const { isValid, errorMessage } = fieldRequiredValidator('valid value');
+    expect(isValid).toBeTruthy();
+    expect(errorMessage).toEqual('');
+  });
 });
