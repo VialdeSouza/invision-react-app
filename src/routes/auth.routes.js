@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Login } from '../pages/login';
+import Signup from '../pages/signup';
 
-const Signup = () => (<></>);
 const AuthRoutes = () => (
   <Router>
     <Router path="/" exact component={Login} />

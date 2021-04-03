@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import FieldEmail from '../components/fieldEmail';
 import FieldName from '../components/fieldName';
 import FieldPassword from '../components/fieldPassword';
@@ -37,6 +38,7 @@ const Signup = () => {
         />
         <input type="submit" value="Sign up" />
       </form>
+      <Link to="/">Log In</Link>
     </div>
   );
 };
