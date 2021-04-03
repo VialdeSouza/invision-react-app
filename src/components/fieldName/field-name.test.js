@@ -12,8 +12,17 @@ const renderWithProviders = async (component) => {
 describe('Field Name', () => {
   test('should call requirerFieldValidator with value onChange input', () => {
     renderWithProviders(<FieldName onChange={() => {}} value="" />);
-    const passwordInput = screen.getByRole('textbox', { name: /full name/i });
-    fireEvent.change(passwordInput, { target: { value: 'any name' } });
+    const nameInput = screen.getByRole('textbox', { name: /full name/i });
+    fireEvent.change(nameInput, { target: { value: 'any name' } });
     expect(fieldRequiredValidator).toHaveBeenCalledWith('any name');
+  });
+
+  test('should show error when requirerFieldValidator returns error', () => {
+    render(<FieldName onChange={() => {}} value="" />);
+    fieldRequiredValidator.mockImplementation(() => ({ isValid: false, errorMessage: 'any message error' }));
+    const nameInput = screen.getByRole('textbox', { name: /full name/i });
+    fireEvent.change(nameInput, { target: { value: 'invalid name' } });
+    const errorMessage = screen.getByText(/any message error/i);
+    expect(errorMessage).toBeInTheDocument();
   });
 });
