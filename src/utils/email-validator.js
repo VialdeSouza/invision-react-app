@@ -11,6 +11,6 @@ const emailValidator = (email) => {
   if (!isEmail) {
     return ({ isValid: false, errorMessage: 'O email está incorreto' });
   }
-  return ({ isValid: false, errorMessage: 'any rule was broken' });
+  return ({ isValid: true, errorMessage: '' });
 };
 export default emailValidator;
