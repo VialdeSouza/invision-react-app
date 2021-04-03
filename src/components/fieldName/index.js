@@ -9,6 +9,7 @@ const FieldName = ({ onChange, value }) => {
     const name = e.target.value;
     const { errorMessage } = fieldRequiredValidator(name);
     setError(errorMessage);
+    onChange(e);
   };
   return (
     <Field
