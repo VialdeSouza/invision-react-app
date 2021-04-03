@@ -25,4 +25,11 @@ describe('Field Name', () => {
     const errorMessage = screen.getByText(/any message error/i);
     expect(errorMessage).toBeInTheDocument();
   });
+  test('should call onChange when change value name', () => {
+    const onChange = jest.fn();
+    renderWithProviders(<FieldName onChange={onChange} value="" />);
+    const nameInput = screen.getByRole('textbox', { name: /full name/i });
+    fireEvent.change(nameInput, { target: { value: 'any name' } });
+    expect(onChange).toHaveBeenCalled();
+  });
 });
