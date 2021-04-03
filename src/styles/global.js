@@ -23,6 +23,7 @@ export const GlobalStyle = createGlobalStyle`
     outline: 0;
   }
   body {
+    min-height: 100vh;
     background: #FFFFFF;
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;

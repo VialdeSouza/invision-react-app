@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import FieldEmail from '../components/fieldEmail';
 import FieldPassword from '../components/fieldPassword';
 import GoogleButton from '../components/socialButton';
 import { signIn } from '../core/signin-core';
-import { Button } from './styles';
+import {
+  Button, Form, Title, WrapperContent, Helper, StyledLink, TextLine, Logo, Aside,
+} from './styles';
 
 export const Login = () => {
   const [loginForm, setLoginForm] = useState({ password: '', email: '' });
@@ -25,22 +26,34 @@ export const Login = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={onSubmitForm}>
-        <FieldEmail
-          onChange={onChangeEmail}
-          value={loginForm.email}
-        />
+    <Aside>
+      <Logo>Invision</Logo>
+      <WrapperContent>
+        <Title>Welcome to Invision</Title>
+        <Form onSubmit={onSubmitForm}>
+          <FieldEmail
+            onChange={onChangeEmail}
+            value={loginForm.email}
+          />
 
-        <FieldPassword
-          value={loginForm.password}
-          onChange={onChangePassword}
-        />
+          <FieldPassword
+            value={loginForm.password}
+            onChange={onChangePassword}
+          />
+          <Helper right>Forgot password?</Helper>
+          <Button type="submit" value="Sign in" />
+        </Form>
+        <TextLine>
+          Or
+        </TextLine>
+        <GoogleButton />
+        <Helper right>
+          New Invision?
+          {' '}
+          <StyledLink to="/signup">Create Account</StyledLink>
+        </Helper>
 
-        <Button type="submit" value="Sign in" />
-      </form>
-      <GoogleButton />
-      <Link to="/signup">Create Account</Link>
-    </div>
+      </WrapperContent>
+    </Aside>
   );
 };
