@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import FieldEmail from '../components/fieldEmail';
 import FieldPassword from '../components/fieldPassword';
+import GoogleButton from '../components/socialButton';
 import { signIn } from '../core/signin-core';
+import { Button } from './styles';
 
 export const Login = () => {
   const [loginForm, setLoginForm] = useState({ password: '', email: '' });
@@ -35,11 +37,9 @@ export const Login = () => {
           onChange={onChangePassword}
         />
 
-        <input type="submit" value="Sign in" />
+        <Button type="submit" value="Sign in" />
       </form>
-      <button type="button">
-        Sign in with Google
-      </button>
+      <GoogleButton />
       <Link to="/signup">Create Account</Link>
     </div>
   );

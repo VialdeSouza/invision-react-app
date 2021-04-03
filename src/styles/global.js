@@ -8,6 +8,7 @@ export const GlobalStyle = createGlobalStyle`
   --green-color: #A9C5BA;
   --small-font: 0.875rem;
   --default-font: 1rem;
+  --regular-font: 1.125rem;
   --medium-font: 1.25rem;
   --large-font: 1.875rem;
   --biggest-font: 2.188rem;
