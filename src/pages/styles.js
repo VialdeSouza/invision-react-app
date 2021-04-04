@@ -67,7 +67,6 @@ export const StyledLink = styled(Link)`
 
 export const WrapperContent = styled.div`
     display: flex;
-    max-width: 720px;
     width: 100%;
     flex-direction: column;
     align-items: center;

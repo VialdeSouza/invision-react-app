@@ -1,10 +1,7 @@
 import styled from 'styled-components';
 
 export const WrapperBanner = styled.div`
-    display: flex;
     width: 100%;
-    min-height: 100vh;
-    align-items: center;
     background-color: var(--green-color);
 `;
 export const Caption = styled.div`
