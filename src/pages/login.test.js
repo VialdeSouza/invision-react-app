@@ -19,7 +19,7 @@ describe('Login form', () => {
   test('should render form to login', () => {
     renderWithProviders(<Login />);
     const emailInput = screen.getByRole('textbox', { name: /users name or Email/i });
-    const passwordInput = screen.getByRole('textbox', { name: /password/i });
+    const passwordInput = screen.getByLabelText(/password/i);
     expect(emailInput).toBeInTheDocument();
     expect(passwordInput).toBeInTheDocument();
   });
@@ -40,7 +40,7 @@ describe('Login form', () => {
     renderWithProviders(<Login />);
     const button = screen.getByRole('button', { name: 'Sign in' });
     const emailInput = screen.getByRole('textbox', { name: /email/i });
-    const passwordInput = screen.getByRole('textbox', { name: /password/i });
+    const passwordInput = screen.getByLabelText(/password/i);
     fireEvent.change(emailInput, { target: { value: 'any email' } });
     fireEvent.change(passwordInput, { target: { value: 'any password' } });
     fireEvent.click(button);

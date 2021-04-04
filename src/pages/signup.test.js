@@ -17,7 +17,7 @@ describe('Signup Form', () => {
     renderWithProviders(<Signup />);
     const nameInput = screen.getByRole('textbox', { name: /full name/i });
     const emailInput = screen.getByRole('textbox', { name: /users name or Email/i });
-    const passwordInput = screen.getByRole('textbox', { name: /create password/i });
+    const passwordInput = screen.getByLabelText(/create password/i);
     expect(nameInput).toBeInTheDocument();
     expect(emailInput).toBeInTheDocument();
     expect(passwordInput).toBeInTheDocument();
@@ -33,7 +33,8 @@ describe('Signup Form', () => {
     renderWithProviders(<Signup />);
     const nameInput = screen.getByRole('textbox', { name: /full name/i });
     const emailInput = screen.getByRole('textbox', { name: /users name or Email/i });
-    const passwordInput = screen.getByRole('textbox', { name: /create password/i });
+    const passwordInput = screen.getByLabelText(/create password/i);
+  
 
     fireEvent.change(nameInput, { target: { value: 'any full name' } });
     fireEvent.change(emailInput, { target: { value: 'any email' } });

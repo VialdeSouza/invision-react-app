@@ -5,7 +5,7 @@ import {
 } from './styles';
 
 const Field = ({
-  value, label, onChange, id, error,
+  value, label, onChange, id, error, type,
 }) => {
   const isError = error.length > 0;
   return (
@@ -18,6 +18,7 @@ const Field = ({
           onChange={onChange}
           error={isError}
           required
+          type={type}
         />
       </Label>
       {isError && <Warning>{error}</Warning>}
@@ -26,6 +27,7 @@ const Field = ({
 };
 Field.defaultProps = {
   error: '',
+  type: 'text',
 };
 Field.propTypes = {
   error: PropTypes.string,
@@ -33,6 +35,7 @@ Field.propTypes = {
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
+  type: PropTypes.string,
 };
 
 export default Field;

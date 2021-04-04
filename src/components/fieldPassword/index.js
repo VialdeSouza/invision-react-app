@@ -16,6 +16,7 @@ const FieldPassword = ({ label, onChange, value }) => {
     <Field
       label={label}
       id="password"
+      type="password"
       onChange={onChangePassword}
       value={value}
       error={error}
