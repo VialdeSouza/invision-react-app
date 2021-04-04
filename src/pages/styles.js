@@ -16,7 +16,7 @@ export const Logo = styled.h1`
     font-size: var(--biggest-font);
     color: #000000;
     letter-spacing: -2px;
-    text-align: right;
+    align-self: flex-end;
 `;
 
 export const Title = styled.h3`
@@ -65,18 +65,14 @@ export const StyledLink = styled(Link)`
     color: var(--green-color);
 `;
 
-export const Aside = styled.div`
-    max-width: 720px;
-    width: 100%;
-    height: 100vh;
-    padding: 10px;
-`;
-
 export const WrapperContent = styled.div`
     display: flex;
+    max-width: 720px;
+    width: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 10px;
 `;
 
 export const Form = styled.form`

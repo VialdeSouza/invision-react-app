@@ -4,7 +4,7 @@ import FieldPassword from '../components/fieldPassword';
 import GoogleButton from '../components/socialButton';
 import { signIn } from '../core/signin-core';
 import {
-  Button, Form, Title, WrapperContent, Helper, StyledLink, TextLine, Logo, Aside,
+  Button, Form, Title, WrapperContent, Helper, StyledLink, TextLine, Logo,
 } from './styles';
 
 export const Login = () => {
@@ -26,34 +26,34 @@ export const Login = () => {
   };
 
   return (
-    <Aside>
+
+    <WrapperContent>
       <Logo>Invision</Logo>
-      <WrapperContent>
-        <Title>Welcome to Invision</Title>
-        <Form onSubmit={onSubmitForm}>
-          <FieldEmail
-            onChange={onChangeEmail}
-            value={loginForm.email}
-          />
+      <Title>Welcome to Invision</Title>
+      <Form onSubmit={onSubmitForm}>
+        <FieldEmail
+          onChange={onChangeEmail}
+          value={loginForm.email}
+        />
 
-          <FieldPassword
-            value={loginForm.password}
-            onChange={onChangePassword}
-          />
-          <Helper right>Forgot password?</Helper>
-          <Button type="submit" value="Sign in" />
-        </Form>
-        <TextLine>
-          Or
-        </TextLine>
-        <GoogleButton />
-        <Helper right>
-          New Invision?
-          {' '}
-          <StyledLink to="/signup">Create Account</StyledLink>
-        </Helper>
+        <FieldPassword
+          value={loginForm.password}
+          onChange={onChangePassword}
+        />
+        <Helper right>Forgot password?</Helper>
+        <Button type="submit" value="Sign in" />
+      </Form>
+      <TextLine>
+        Or
+      </TextLine>
+      <GoogleButton />
+      <Helper right>
+        New Invision?
+        {' '}
+        <StyledLink to="/signup">Create Account</StyledLink>
+      </Helper>
 
-      </WrapperContent>
-    </Aside>
+    </WrapperContent>
+
   );
 };
