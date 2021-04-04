@@ -24,7 +24,7 @@ export const Title = styled.h3`
     font-weight: normal;
     color:  var(--main-color);
     letter-spacing: -1px;
-    margin: 40px 0;
+    margin: 30px 0 20px 0;
 `;
 
 export const Helper = styled.span`
@@ -49,14 +49,14 @@ export const TextLine = styled.span`
     display: inline-block;
     content: "";
     border-top: 1px solid var(--main-color);
-    width: 150px;
+    width: 140px;
     margin: 0 5px;
   }
   &:before {
     display: inline-block;
     content: "";
     border-top: 1px solid var(--main-color);
-    width: 150px;
+    width: 140px;
     margin: 0 5px;
   }
 `;
@@ -72,7 +72,7 @@ export const WrapperContent = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    padding: 20px;
 `;
 
 export const Form = styled.form`

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;  
+    margin-bottom: 15px;
 `;
 
 export const Label = styled.label`
@@ -11,11 +12,11 @@ export const Label = styled.label`
     text-align: left;
     font-size: var(--small-font);
     color: var(--main-color);
-    height: 4.063rem;
+    height: 60px;
 `;
 
 export const Input = styled.input`
-    height: 2.625rem;
+    height: 36px;
     border: none;
     border-bottom: 1px solid var(--main-color);
     font-size: var(--default-font);
