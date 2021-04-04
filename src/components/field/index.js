@@ -17,6 +17,7 @@ const Field = ({
           value={value}
           onChange={onChange}
           error={isError}
+          required
         />
       </Label>
       {isError && <Warning>{error}</Warning>}
