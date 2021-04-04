@@ -34,6 +34,7 @@ export const Indicator = styled.button`
     border-radius: 90px;
     display: inline-block;
     margin: 0 8px;
+    cursor: pointer;
     ${(props) => props.isSelected && `
     background-color: #FFFFFF;
     width: 26px;

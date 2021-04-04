@@ -15,4 +15,5 @@ export const Button = styled.button`
     justify-content: space-between;
     padding: 0 30px;
     margin: 40px 0;
+    cursor: pointer;
 `;

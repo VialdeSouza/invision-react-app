@@ -2,14 +2,15 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Button = styled.input`
-    height: 2.813rem;
-    width: 10.94rem;
+    height: 45px;
+    width: 175px;
     border: none;
     border-radius: 100px;
     background-color: var(--main-color);
     font-size: var(--default-font);
     color:  var(--contrast-main-color);
     margin: 40px auto;
+    cursor: pointer;
 `;
 
 export const Logo = styled.h1`
