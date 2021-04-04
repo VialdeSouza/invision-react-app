@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
   --medium-font: 1.25rem;
   --large-font: 1.875rem;
   --biggest-font: 2.188rem;
-  --main-font: 'Mulish', sans-serif;
+  --main-font: 'Muli', sans-serif;
   --secondary-font: 'Lato', sans-serif;
   }
 
@@ -23,7 +23,6 @@ export const GlobalStyle = createGlobalStyle`
     outline: 0;
   }
   body {
-    min-height: 100vh;
     background: #FFFFFF;
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
