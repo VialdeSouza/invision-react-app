@@ -9,10 +9,12 @@ const renderWithProviders = async (component) => {
   fieldRequiredValidator.mockImplementation(() => ({ isValid: true, errorMessage: '' }));
   return render(component);
 };
+const getNameInput = () => screen.getByRole('textbox', { name: /full name/i });
+
 describe('Field Name', () => {
   test('should call requirerFieldValidator with value onChange input', () => {
     renderWithProviders(<FieldName onChange={() => {}} value="" />);
-    const nameInput = screen.getByRole('textbox', { name: /full name/i });
+    const nameInput = getNameInput();
     fireEvent.change(nameInput, { target: { value: 'any name' } });
     expect(fieldRequiredValidator).toHaveBeenCalledWith('any name');
   });
@@ -20,7 +22,7 @@ describe('Field Name', () => {
   test('should show error when requirerFieldValidator returns error', () => {
     render(<FieldName onChange={() => {}} value="" />);
     fieldRequiredValidator.mockImplementation(() => ({ isValid: false, errorMessage: 'any message error' }));
-    const nameInput = screen.getByRole('textbox', { name: /full name/i });
+    const nameInput = getNameInput();
     fireEvent.change(nameInput, { target: { value: 'invalid name' } });
     const errorMessage = screen.getByText(/any message error/i);
     expect(errorMessage).toBeInTheDocument();
@@ -29,14 +31,14 @@ describe('Field Name', () => {
   test('should call onChange when change value name', () => {
     const onChange = jest.fn();
     renderWithProviders(<FieldName onChange={onChange} value="" />);
-    const nameInput = screen.getByRole('textbox', { name: /full name/i });
+    const nameInput = getNameInput();
     fireEvent.change(nameInput, { target: { value: 'any name' } });
     expect(onChange).toHaveBeenCalled();
   });
 
   test('should render prop value in FieldPassword', () => {
     renderWithProviders(<FieldName onChange={() => {}} value="any name" />);
-    const nameInput = screen.getByRole('textbox', { name: /full name/i });
+    const nameInput = getNameInput();
     expect(nameInput.value).toEqual('any name');
   });
 });
