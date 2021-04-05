@@ -26,7 +26,7 @@ const getButtons = () => {
   return { buttonSignIn, socialButton };
 };
 const getLinks = () => {
-  const link = getLinks();
+  const link = screen.getByRole('link', { name: /create account/i });
   return { link };
 };
 
